@@ -1,0 +1,15 @@
+# Python and Environments
+venv/
+__pycache__/
+*.pyc
+
+# Machine Learning outputs & data
+data/
+saved_models/
+*.pth
+*.pt
+logs/
+wandb/
+
+# Jupyter
+.ipynb_checkpoints/
