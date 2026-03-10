@@ -1,6 +1,6 @@
 import os
 import torch
-from configs.config import CONFIG_DICT
+from linearized_flow_matching.configs.config import CONFIG_DICT
 
 SEED=CONFIG_DICT['random_seed']
 

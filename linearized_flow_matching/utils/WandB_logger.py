@@ -1,4 +1,4 @@
-from configs.config import CONFIG_DICT
+from linearized_flow_matching.configs.config import CONFIG_DICT
 
 # --- Unpack Configurations ---
 DATASET = CONFIG_DICT['dataset']
@@ -8,7 +8,7 @@ BATCH_SIZE = CONFIG_DICT['batch_size']
 VAL_BATCH_SIZE = CONFIG_DICT['val_batch_size']
 MODEL_CHANNELS = CONFIG_DICT['model_channels']
 NUM_LAYERS_G = CONFIG_DICT['num_layers_g']
-INIT_FACTOR_A = CONFIG_DICT['init_factor_a']
+INIT_FACTOR_A = CONFIG_DICT['init_factor_A']
 LR = CONFIG_DICT['lr']
 EPOCHS = CONFIG_DICT['epochs']
 EVAL_INTERVAL = CONFIG_DICT['eval_interval']

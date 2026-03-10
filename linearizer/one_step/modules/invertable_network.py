@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from linearizer import G
+from linearizer.linearizer import G
 
 
 # ---------- Small helpers ----------

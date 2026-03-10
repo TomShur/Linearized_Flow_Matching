@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.linalg
-from one_step.modules.linear_network import OneStepLinearModule
+from linearizer.one_step.modules.linear_network import OneStepLinearModule
 
-from linearizer import Linearizer
+from linearizer.linearizer import Linearizer
 
 
 class FixedLinearMatrix(OneStepLinearModule):

@@ -2,14 +2,13 @@ import torch
 import torch.optim as optim
 import tqdm
 import os
-from linearizer.one_step.modules.invertable_network_new import InvUnet, InverseUnet
+from linearizer.one_step.modules.invertable_network_new import InvUnet
 from linearizer.common.song__unet import creat_song_unet
-from linearizer import TimeVaryingGLinearizer, FixedLinearMatrix
-from linearized_flow_matching.core.model_architectures import TimeG_FlowMatcher
-from ema import EMA
+from linearized_flow_matching.core.model_architectures import TimeVaryingGLinearizer, FixedLinearMatrix, TimeG_FlowMatcher
+from linearized_flow_matching.core.ema import EMA
 from linearized_flow_matching.utils.sampling import sample_and_show
-from utils.checkpointing import save_checkpoint
-from configs.config import CONFIG_DICT
+from linearized_flow_matching.utils.checkpointing import save_checkpoint
+from linearized_flow_matching.configs.config import CONFIG_DICT
 
 # Unpack config dictionary into variables for easier access
 DATASET = CONFIG_DICT['dataset']
@@ -25,7 +24,7 @@ LR = CONFIG_DICT['lr']
 EPOCHS = CONFIG_DICT['epochs']
 EVAL_INTERVAL = CONFIG_DICT['eval_interval']
 GRADIENT_CLIP_THRESOLD = CONFIG_DICT['gradient_clip_threshold']
-SAVE_DIR_BASE = CONFIG_DICT['save_dir_base']
+SAVE_DIR_BASE = CONFIG_DICT['saved_models_base_dir']
 SAVE_DIR_RAW = os.path.join(SAVE_DIR_BASE, 'raw')
 SAVE_DIR_EMA = os.path.join(SAVE_DIR_BASE, 'ema')
 

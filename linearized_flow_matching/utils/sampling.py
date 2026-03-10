@@ -2,12 +2,17 @@ import torch
 import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 from linearized_flow_matching.core.model_architectures import TimeG_FlowMatcher
-from linearized_flow_matching.configs.config import config
+from linearized_flow_matching.configs.config import CONFIG_DICT
 
-NUM_SAMPLING_STEPS = config['NUM_SAMPLING_STEPS']
-NUM_SAMPLES = config['NUM_SAMPLES']
-IMG_SIZE = config['IMG_SIZE']
-IN_CHANNELS = config['IN_CHANNELS']
+# NUM_SAMPLING_STEPS = CONFIG_DICT['NUM_SAMPLING_STEPS']
+# NUM_SAMPLES = CONFIG_DICT['NUM_SAMPLES']
+# IMG_SIZE = CONFIG_DICT['IMG_SIZE']
+# IN_CHANNELS = CONFIG_DICT['IN_CHANNELS']
+
+NUM_SAMPLING_STEPS = CONFIG_DICT['num_sampling_steps']
+NUM_SAMPLES = CONFIG_DICT['num_samples']
+IMG_SIZE = CONFIG_DICT['img_size']
+IN_CHANNELS = CONFIG_DICT['in_channels']
 
 
 def show_samples(samples, title="Generated Samples"):

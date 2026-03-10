@@ -1,6 +1,6 @@
 import os
 import torch
-from configs.config import SAVE_DIR_RAW, SAVE_DIR_EMA
+from linearized_flow_matching.configs.config import SAVE_DIR_RAW, SAVE_DIR_EMA
 
 
 

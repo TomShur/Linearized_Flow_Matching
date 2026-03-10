@@ -4,9 +4,10 @@ import torch.nn.functional as F
 from linearized_flow_matching.core.losses import IsometryLoss
 from piq import LPIPS
 from linearizer.one_step.modules.linear_network import OneStepLinearModule
-from linearizer import Linearizer
-from utils import pair_batch
-from configs.config import CONFIG_DICT
+from linearizer.linearizer import Linearizer
+# from utils import pair_batch
+from linearized_flow_matching.core.pair_batch import pair_batch
+from linearized_flow_matching.configs.config import CONFIG_DICT
 
 # Unpack config
 INIT_FACTOR_A = CONFIG_DICT['init_factor_A']
@@ -255,7 +256,9 @@ class TimeG_FlowMatcher:
         target_LPIPS_loss = torch.tensor(0.0, device=device)
 
         if self.lambda_target_L2 > 0 or self.lambda_target_LPIPS > 0:
-            hat_x_1 = self._predict_target_x1(x0, batch_size, device)
+            # hat_x_1 = self._predict_target_x1(x0, batch_size, device)
+            hat_x_1 = self._predict_target_x1(x0, t0, batch_size, device)
+
             target_L2_loss = self._calc_target_l2_loss(hat_x_1, x1, t_start=t0, device=device)
             target_LPIPS_loss = self._calc_target_lpips_loss(hat_x_1, x1, t_start=t0, device=device)
 
@@ -357,7 +360,8 @@ class TimeG_FlowMatcher:
 
         # Calculate e^A
         A = next(self.linearizer.linear_network.parameters())
-        exp_A = torch.matrix_exp(A)
+        # exp_A = torch.matrix_exp(A)
+        exp_A = torch.linalg.matrix_exp(A)
 
         # Jump forward
         z0_flat = z0.view(batch_size, -1)
