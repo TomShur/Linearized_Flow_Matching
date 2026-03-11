@@ -1,6 +1,6 @@
 import torch
 import torch.optim as optim
-import tqdm
+from tqdm import tqdm
 import os
 from linearizer.one_step.modules.invertable_network_new import InvUnet
 from linearizer.common.song__unet import creat_song_unet
@@ -32,6 +32,7 @@ SAVE_DIR_EMA = os.path.join(SAVE_DIR_BASE, 'ema')
 def training_init(
         # model_name,
         device,
+        wandb_run=None,
         # img_size=IMG_SIZE,
         # in_channels=IN_CHANNELS,
         # num_layers_g=NUM_LAYERS_G,
@@ -56,7 +57,8 @@ def training_init(
 
     # Create Flow Matcher Loss Module
     fm = TimeG_FlowMatcher(
-        model,
+        linearizer=model,
+        wandb_run=wandb_run,
         lambdas_dict=lambdas_dict
     )
 
@@ -94,7 +96,8 @@ def train_model(
         }
 
 
-        with tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}", unit="batch") as pbar:
+        # with tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}", unit="batch") as pbar:
+        with tqdm(train_loader, desc=f"Epoch {epoch+1}", unit="batch", mininterval=10) as pbar:
             for batch_idx, (data, _) in enumerate(pbar):
                 data = data.to(device)
                 optimizer.zero_grad()

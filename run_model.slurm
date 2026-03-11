@@ -8,6 +8,8 @@
 #SBATCH --time=01:00:00            # We are asking for a 4-hour time limit
 #SBATCH --output=training_log.txt  # SLURM will save all your print() outputs to this file
 
+# > training_log.txt  # Clear the log file at the start of the job
+
 # 1. Activate the Python environment we built together
 source venv/bin/activate  
 

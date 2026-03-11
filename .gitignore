@@ -13,3 +13,5 @@ wandb/
 
 # Jupyter
 .ipynb_checkpoints/
+
+.env

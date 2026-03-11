@@ -1,9 +1,11 @@
 import wandb
 import torch
+from dotenv import load_dotenv
+import os
 from linearized_flow_matching.core.training_functions import training_init, train_model
 from linearized_flow_matching.configs.config import CONFIG_DICT
-from utils.WandB_logger import wandb_init
-from utils.setup import seed_everything
+from linearized_flow_matching.utils.WandB_logger import wandb_init
+from linearized_flow_matching.utils.setup import seed_everything
 from linearized_flow_matching.data.mnist import get_optimized_loader
 
 def main(device, model_index):
@@ -11,12 +13,15 @@ def main(device, model_index):
 
     MODEL_NAME = f'model{model_index}'
 
-    wandb.login()
+    if os.getenv("WANDB_API_KEY"):
+        wandb.login(key=os.getenv("WANDB_API_KEY"))
+    else:
+        wandb.login()
     wandb_run = wandb_init(wandb, model_name=MODEL_NAME) # Instantiate
 
     train_loader = get_optimized_loader()
 
-    model, ema, fm, optimizer = training_init(device=device)
+    model, ema, fm, optimizer = training_init(device=device, wandb_run=wandb_run)
     train_model(
         device=device,
         model=model,
@@ -26,6 +31,8 @@ def main(device, model_index):
         train_loader=train_loader,
         wandb_run=wandb_run
     )
+
+load_dotenv()
 
 MODEL_INDEX = CONFIG_DICT['model_index']
 

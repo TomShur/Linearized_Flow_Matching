@@ -259,8 +259,11 @@ class TimeG_FlowMatcher:
             # hat_x_1 = self._predict_target_x1(x0, batch_size, device)
             hat_x_1 = self._predict_target_x1(x0, t0, batch_size, device)
 
-            target_L2_loss = self._calc_target_l2_loss(hat_x_1, x1, t_start=t0, device=device)
-            target_LPIPS_loss = self._calc_target_lpips_loss(hat_x_1, x1, t_start=t0, device=device)
+            # target_L2_loss = self._calc_target_l2_loss(hat_x_1, x1, t_start=t0, device=device)
+            target_L2_loss = self._calc_target_l2_loss(hat_x_1, x1, device=device)
+
+            # target_LPIPS_loss = self._calc_target_lpips_loss(hat_x_1, x1, t_start=t0, device=device)
+            target_LPIPS_loss = self._calc_target_lpips_loss(hat_x_1, x1, device=device)
 
         # Regularization Losses
         frob_loss = self._calc_frob_loss(matrix_A, device)

@@ -1,4 +1,6 @@
 import torch
+import wandb
+import os
 import matplotlib.pyplot as plt
 import torchvision.utils as vutils
 from linearized_flow_matching.core.model_architectures import TimeG_FlowMatcher
@@ -61,12 +63,27 @@ def sample_and_show(model, epoch, batch_precent, wandb_run, device, model_type_s
         grid_col = vutils.make_grid(samples_discrete_collapsed.clamp(-1, 1), normalize=True, nrow=4)
         grid_iter = vutils.make_grid(samples_iter.clamp(-1, 1), normalize=True, nrow=4)
 
-        wandb_run.log({
-            f"samples/{model_type_string}_1_Exact_Exp": wandb_run.Image(grid_exp, caption=f"{model_type_string} EXP"),
-            f"samples/{model_type_string}_2_Discrete_Collapsed": wandb_run.Image(grid_col, caption=f"{model_type_string} Collapsed"),
-            f"samples/{model_type_string}_3_Iterative_Euler": wandb_run.Image(grid_iter, caption=f"{model_type_string} Iterative"),
-            "epoch": epoch + 1
-        }, step=epoch+1)
+        
+        # make a dir to save the models if it doesn't exist
+        os.makedirs("samples", exist_ok=True)
+        vutils.save_image(grid_exp, f"samples/epoch_{epoch+1}_{model_type_string}_exp.png", normalize=True)
+        vutils.save_image(grid_col, f"samples/epoch_{epoch+1}_{model_type_string}_col.png", normalize=True)
+        vutils.save_image(grid_iter, f"samples/epoch_{epoch+1}_{model_type_string}_iter.png", normalize=True)
+
+
+        # wandb_run.log({
+        #     # f"samples/{model_type_string}_1_Exact_Exp": wandb_run.Image(grid_exp, caption=f"{model_type_string} EXP"),
+        #     # f"samples/{model_type_string}_2_Discrete_Collapsed": wandb_run.Image(grid_col, caption=f"{model_type_string} Collapsed"),
+        #     # f"samples/{model_type_string}_3_Iterative_Euler": wandb_run.Image(grid_iter, caption=f"{model_type_string} Iterative"),
+
+
+        #     f"samples/{model_type_string}_1_Exact_Exp": wandb.Image(grid_exp, caption=f"{model_type_string} EXP"),
+        #     f"samples/{model_type_string}_2_Discrete_Collapsed": wandb.Image(grid_col, caption=f"{model_type_string} Collapsed"),
+        #     f"samples/{model_type_string}_3_Iterative_Euler": wandb.Image(grid_iter, caption=f"{model_type_string} Iterative"),
+
+            
+        #     "epoch": epoch + 1
+        # })#, step=epoch+1)
 
     model.train()
 
