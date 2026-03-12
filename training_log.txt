@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/rg/shocher_prj/tom.shur/Linearized_Flow_Matching/main.py", line 5, in <module>
-    from utils.WandB_logger import wandb_init
-ModuleNotFoundError: No module named 'utils'
