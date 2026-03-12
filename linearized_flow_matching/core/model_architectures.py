@@ -404,7 +404,7 @@ class TimeG_FlowMatcher:
         mat_metrics = self._test_matrix_stability(x_noise, device)
 
         # Log to WandB
-        if self.wandb_run.run is not None:
+        if self.wandb_run is not None:
             log_dict = {}
             for k, v in {**inv_metrics, **lat_metrics, **time_metrics, **mat_metrics}.items():
                 log_dict[f"diagnostics/{k}"] = v

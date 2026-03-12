@@ -97,7 +97,14 @@ def train_model(
 
 
         # with tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}", unit="batch") as pbar:
-        with tqdm(train_loader, desc=f"Epoch {epoch+1}", unit="batch", mininterval=10) as pbar:
+        with tqdm(
+            train_loader,
+            desc=f"Epoch {epoch+1}",
+            unit="batch",
+            mininterval=10,
+            position=0,       # pin bar to one line
+            leave=True        # keep final bar instead of ghost lines
+            ) as pbar:
             for batch_idx, (data, _) in enumerate(pbar):
                 data = data.to(device)
                 optimizer.zero_grad()

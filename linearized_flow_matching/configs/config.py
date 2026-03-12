@@ -2,7 +2,7 @@ import os
 
 CONFIG_DICT = {
 
-    'model_index': 47,
+    'model_index': 48,
 
     'saved_models_base_dir': 'linearized_flow_matching/saved_models',
     'random_seed': 42,

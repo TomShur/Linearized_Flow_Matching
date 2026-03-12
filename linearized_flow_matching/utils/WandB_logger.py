@@ -1,3 +1,4 @@
+import wandb
 from linearized_flow_matching.configs.config import CONFIG_DICT
 
 # --- Unpack Configurations ---
@@ -18,8 +19,7 @@ INT_T_CONF = CONFIG_DICT['int_t_conf']
 LAMBDAS_DICT = CONFIG_DICT['lambdas']
 
 def wandb_init(
-        wandb,
-        model_name,
+    model_name,
         project_name="linearized-flow-matching",
         epochs=EPOCHS,
         batch_size=BATCH_SIZE,

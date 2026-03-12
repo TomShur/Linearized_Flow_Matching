@@ -17,7 +17,7 @@ def main(device, model_index):
         wandb.login(key=os.getenv("WANDB_API_KEY"))
     else:
         wandb.login()
-    wandb_run = wandb_init(wandb, model_name=MODEL_NAME) # Instantiate
+    wandb_run = wandb_init(model_name=MODEL_NAME) # Instantiate
 
     train_loader = get_optimized_loader()
 
